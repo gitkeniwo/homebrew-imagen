@@ -8,23 +8,24 @@ cask "imagen" do
   homepage "https://github.com/gitkeniwo/imagen"
 
   depends_on arch: :arm64
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
 
   app "Imagen.app"
 
   # The app is ad-hoc signed and not notarized; drop the download quarantine
   # so Gatekeeper does not report it as damaged on first launch.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Imagen.app"]
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:         ["-dr", "com.apple.quarantine", "{{appdir}}/Imagen.app"],
+        must_succeed: false
   end
 
   # The user's image library lives wherever they chose and is never removed.
   zap trash: [
     "~/.config/imagen/desktop.json",
-    "~/.config/imagen/ui.json",
     "~/.config/imagen/logs",
-    "~/Library/WebKit/com.gitkeniwo.imagen",
+    "~/.config/imagen/ui.json",
     "~/Library/Caches/com.gitkeniwo.imagen",
+    "~/Library/WebKit/com.gitkeniwo.imagen",
   ]
 end
