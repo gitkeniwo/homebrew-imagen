@@ -1,6 +1,6 @@
 cask "imagen" do
-  version "0.2.0"
-  sha256 "972cf32b4669061021a1f58d36104d35284655adcfe9bbdd3b02c4985950fca9"
+  version "0.2.1"
+  sha256 "1a6d8d5b929bcde0ac89cc907dd8fa293611343032e5c18cb7d144f99edceadc"
 
   url "https://github.com/gitkeniwo/imagen/releases/download/v#{version}/Imagen_#{version}_aarch64.dmg"
   name "Imagen"
@@ -11,6 +11,10 @@ cask "imagen" do
   depends_on macos: :sequoia
 
   app "Imagen.app"
+
+  # Quit a running copy before replacing it: the app is a single-instance
+  # shell, so a leftover old process would keep its old UI on screen.
+  uninstall quit: "com.gitkeniwo.imagen"
 
   # The app is ad-hoc signed and not notarized; drop the download quarantine
   # so Gatekeeper does not report it as damaged on first launch.
