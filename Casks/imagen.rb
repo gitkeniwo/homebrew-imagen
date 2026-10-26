@@ -1,6 +1,6 @@
 cask "imagen" do
-  version "0.2.7"
-  sha256 "67c3e84da4c1bbec411fbf84443fa3e80008f912d652369ac4ff6a455df767e4"
+  version "0.2.8"
+  sha256 "6fc33bda648833e0312c98bbe640a7149c8396f2a1695039af2913288f3a53ee"
 
   url "https://github.com/gitkeniwo/imagen/releases/download/v#{version}/Imagen_#{version}_aarch64.dmg"
   name "Imagen"
